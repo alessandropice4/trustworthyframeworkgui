@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import subprocess
+import os
 
 def commit():
     commit_message = commit_entry.get()
@@ -8,18 +9,9 @@ def commit():
         messagebox.showerror("Errore", "Inserisci un messaggio di commit valido.")
     else:
         try:
-            # Rimuovi lo script stesso dall'area di staging
-            subprocess.run(['git', 'reset', 'HEAD', __file__])
-            
-            # Aggiungi i file modificati all'area di staging
             subprocess.run(['git', 'add', '.'])
-            
-            # Esegui la commit
             subprocess.run(['git', 'commit', '-m', commit_message])
-            
-            # Push sul branch principale
             subprocess.run(['git', 'push', 'origin', 'main'])
-            
             messagebox.showinfo("Successo", "Commit eseguito con successo.")
             root.destroy()
         except Exception as e:
@@ -36,5 +28,9 @@ commit_entry.pack(pady=5)
 
 commit_button = tk.Button(root, text="OK", command=commit)
 commit_button.pack(pady=5)
+
+# Rimuovi lo script corrente dalla staging area prima della commit
+script_path = os.path.abspath(__file__)
+subprocess.run(['git', 'reset', 'HEAD', '--', script_path])
 
 root.mainloop()
