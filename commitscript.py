@@ -10,7 +10,7 @@ def commit():
         try:
             subprocess.run(['git', 'add', '.'])
             subprocess.run(['git', 'commit', '-m', commit_message])
-            subprocess.run(['git', 'push', 'origin', 'master'])
+            subprocess.run(['git', 'push', 'origin', 'main'])
             messagebox.showinfo("Successo", "Commit eseguito con successo.")
             root.destroy()
         except Exception as e:
