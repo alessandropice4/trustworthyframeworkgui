@@ -20,7 +20,7 @@ function Navbar() {
   return (
     <>
       <nav
-        className="navbar navbar-expand-md sticky-top py-3"
+        className="navbar navbar-expand-md sticky-top "
         style={{ background: "#b39ddb", height: 137 }}
       >
         <style
