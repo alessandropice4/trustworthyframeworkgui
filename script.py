@@ -8,9 +8,18 @@ def commit():
         messagebox.showerror("Errore", "Inserisci un messaggio di commit valido.")
     else:
         try:
+            # Rimuovi lo script stesso dall'area di staging
+            subprocess.run(['git', 'reset', 'HEAD', __file__])
+            
+            # Aggiungi i file modificati all'area di staging
             subprocess.run(['git', 'add', '.'])
+            
+            # Esegui la commit
             subprocess.run(['git', 'commit', '-m', commit_message])
+            
+            # Push sul branch principale
             subprocess.run(['git', 'push', 'origin', 'main'])
+            
             messagebox.showinfo("Successo", "Commit eseguito con successo.")
             root.destroy()
         except Exception as e:
