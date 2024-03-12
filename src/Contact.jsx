@@ -10,7 +10,7 @@ const Contact = () => {
   const form = useRef();
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1001 });
   }, []);
 
   const handleSubmit = (e) => {
